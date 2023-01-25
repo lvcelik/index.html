@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moja stranica sa vertikalnim tabovima</title>
+    <link rel="stylesheet" href="CSS/styles.css">
+    <style>
+        .Header {
+            float: left;
+            width: 100%;
+            padding: 0.5em 0;
+        }
+
+        .Header h1 {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #6a4aed;
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0;
+            line-height: normal;
+        }
+
+        header {
+            display: block;
+        }
+
+        div.header-line {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 25rem;
+            background: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .full-width-header {
+            position: relative;
+            margin: 0 -30px;
+            padding: .25rem 30px;
+            background: white;
+            color: white;
+            font-size: 1.125rem;
+        }
+
+        .full-width-header::before,
+        .full-width-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 960px;
+            right: 100%;
+            background: red;
+        }
+
+        .full-width-header::after {
+            width: 960px;
+            left: 100%;
+            background: blue;
+        }
+
+        .content {
+            line-height: 28px;
+        }
+
+        .tabs-container {
+            position: relative;
+            background: #2652cc;
+            width: 120px;
+            height: 100vh;
+            float: left;
+            z-index: 20;
+        }
+
+        .tabs-container label {
+            position: relative;
+            padding: 10px;
+            border-bottom: 1px solid;
+            display: block;
+            font-size: 13px;
+            color: whitesmoke;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .tabs-container label:hover {
+            background: darkslateblue;
+        }
+
+        input[name="tab"] {
+            display: none;
+        }
+
+        .tab-content {
+            position: relative;
+            background: #eee;
+            width: calc(100% - 120px);
+            min-height: 100vh;
+            padding: 15px;
+            float: left;
+            box-sizing: border-box;
+            z-index: 19;
+            display: none;
+        }
+
+        input[name="tab"]:checked+.tab-content {
+            display: block;
+            animation: slide 0.5s forwards;
+        }
+
+        .tab-content:after {
+            content: "";
+            clear: both;
+        }
+
+        .tabs-container label:hover {
+            background: darkslateblue;
+        }
+
+        @keyframes slide {
+            from {
+                left: -100%;
+                opacity: 0;
+            }
+
+            to {
+                left: 0;
+                opacity: 1;
+            }
+        }
+        
+
+        .menu-wrapper{
+            display: block;
+            min-height: 100%;
+        }
+        .sidebar{
+            transform: translate3d(-260px, 0px, 0px);
+            position: absolute;
+            width: 260px;
+            /*background:#2652cc;*/
+            color: #eee;
+            left: 0;
+            height: 100%;
+            transition: all .3s;
+        }
+        input[data-function*="swipe"]{
+            position: relative;
+            opacity: 0;
+        }
+        label[data-function*="swipe"]{
+            position: relative;
+            top: 40px;
+            left: 10px;
+            z-index: 1;
+            display: block;
+            width: 42px;
+            height: 42px;
+            font: 42px/42px fontawesome;
+            text-align: center;
+            color: #2652cc;
+            cursor: pointer;
+            transform: translate3d(0, 0, 0);
+            transition: transform .3s;
+        }
+        input[data-function*="swipe"]:checked ~ label[data-function*="swipe"]{
+            transform: translate3d(260px, 0, 0);
+        }
+        .content{
+            transform: translate3d(0, 0, 0);
+            transition: transform .3s;
+            z-index: -1;
+        }
+        input[data-function*="swipe"]:checked ~ .content{
+            transform:translate3d(245px, 0px, 0px);
+        }
+        input[data-function*="swipe"]:checked ~ .sidebar{
+            transform: translate3d(0px, 0px, 0px);
+        }
+        input[data-function*="swipe"]:checked ~ .sidebar .tabs-container{
+            width: 100%;
+        }
+        .tab-content{
+            margin-left: 60px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header class="Header">
+        <div class="header-line">
+            <h1 class="full-width-header">Moja stranica sa vertikalnim tabovima</h1>
+        </div>
+    </header>
+    <div class="menu-wrapper">
+        <!--hamburger menu-->
+        <input data-function="swipe" id="swipe" type="checkbox">
+        <label data-function="swipe" for="swipe">&#xf0c9</label>
+
+        <!--nas vertikalni menu-->
+        <div class="sidebar">
+            <section class="tabs-container">
+                <label for="tab1">Priroda</label>
+                <label for="tab2">Cvijeće</label>
+                <label for="tab3">Planine</label>
+                <label for="tab4">Zgrade</label>
+                <label for="tab5">Ceste</label>
+                <label for="tab6">Šume</label>
+                <label for="tab7">Fancy cards</label>
+            </section>
+        </div>    
+            <div class="content">
+                <input name="tab" id="tab1" type="radio" checked />
+                <section class="tab-content">
+                    <h2>Priroda</h2>
+                    <p>Neki moj tekst koji je povezan sa prirodom</p>
+                    <img src="C:\VJEŽBA GRADIVA NOVO LV\Vjezba-cijelog-gradiva\Vjezba-cijelog-gradiva-9\Pictures\Priroda.jpg"
+                        alt="More" />
+                    <p>Opis koji će se odnositi na prethodnu sliku prirode</p>
+                </section>
+
+                <input name="tab" id="tab2" type="radio" />
+                <section class="tab-content">
+                    <h2>Cvijeće</h2>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                    <img src="img/flowers.jpg" alt="Cvijeće" />
+                </section>
+
+                <input name="tab" id="tab3" type="radio" />
+                <section class="tab-content">
+                    <h2>Planine</h2>
+                    <p>Neki moj tekst koji je povezan sa prirodom</p>
+                    <img src="img/sea.jpg" alt="More" />
+                    <p>Opis koji će se odnositi na prethodnu sliku prirode</p>
+                </section>
+
+                <input name="tab" id="tab4" type="radio" />
+                <section class="tab-content">
+                    <h2>Zgrade</h2>
+                    <p>Neki moj tekst koji je povezan sa prirodom</p>
+                    <img src="img/sea.jpg" alt="More" />
+                    <p>Opis koji će se odnositi na prethodnu sliku prirode</p>
+                </section>
+                <input name="tab" id="tab5" type="radio" />
+                <section class="tab-content">
+                    <h2>Ceste</h2>
+                    <p>Neki moj tekst koji je povezan sa prirodom</p>
+                    <img src="img/sea.jpg" alt="More" />
+                    <p>Opis koji će se odnositi na prethodnu sliku prirode</p>
+                </section>
+                <input name="tab" id="tab6" type="radio" />
+                <section class="tab-content">
+                    <h2>Šume</h2>
+                    <p>Neki moj tekst koji je povezan sa prirodom</p>
+                    <img src="img/sea.jpg" alt="More" />
+                    <p>Opis koji će se odnositi na prethodnu sliku prirode</p>
+                </section>
+                <input name="tab" id="tab7" type="radio" />
+                <section class="tab-content">
+                    <h2>Fancy cards</h2>
+                    <div class="container">
+                        <div class="card">
+                            <div class="face face1">
+                                <div class="content">
+                                    <img style="width: 128px;" src="./img/Slika0.png">
+                                    <h3>Design</h3>
+                                </div>
+                            </div>
+                            <div class="face face2">
+                                <div class="content">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quascumqe minus iste
+                                        veritatis provident
+                                        at</p>
+                                    <a href="#">Read More</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="face face1">
+                                <div class="content">
+                                    <img style="width: 128px;" src="./img/Slika1.png">
+                                    <h3>Design</h3>
+                                </div>
+                            </div>
+                            <div class="face face2">
+                                <div class="content">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quascumqe minus iste
+                                        veritatis provident
+                                        at</p>
+                                    <a href="#">Read More</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="face face1">
+                                <div class="content">
+                                    <img style="width: 128px;" src="./img/Slika2.png">
+                                    <h3>Design</h3>
+                                </div>
+                            </div>
+                            <div class="face face2">
+                                <div class="content">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quascumqe minus iste
+                                        veritatis provident
+                                        at</p>
+                                    <a href="#">Read More</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+                
+
+        
+
+
+</body>
+
+</html>
